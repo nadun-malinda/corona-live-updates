@@ -1,4 +1,11 @@
 .navbar-top {
     background-color: #100e17;
     color: #fff;
+
+    @media (min-width: 576px) {
+        & > .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
 }
