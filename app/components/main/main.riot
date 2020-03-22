@@ -1,0 +1,138 @@
+<main>
+    <navbar />
+    <div class="container h-100">
+        <div class="row h-100">
+            <!-- Left -->
+            <div class="col-lg-6">
+
+                <div class="row mb-4">
+                    <!-- total infections -->
+                    <div class="col-sm-6">
+                        <div class="card card-default text-center">
+                            <div class="card-body">
+                                <h1 class="glow-round">{state.localTotalCases}</h1>
+                                <h5>Infections</h5>
+                                <hr class="hr-white"/>
+                                <div class="activity-horizontal">
+                                    <div class="icon bg-rgba-primary">
+                                        <i class="fas fa-book-medical text-primary"></i>
+                                    </div>
+                                    <div class="count">
+                                        <div>New cases</span>
+                                        <div>{state.localNewCases}</span>
+                                    </div>
+                                </div>
+
+                                <div class="activity-horizontal">
+                                    <div class="icon bg-rgba-warning">
+                                        <i class="fas fa-procedures text-warning"></i>
+                                    </div>
+                                    <div class="count">
+                                        <div>Hospitalized</span>
+                                        <div>{state.localNumHospitalized}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /total infections -->
+
+                    <!-- total deaths -->
+                    <div class="col-sm-6">
+                        <div class="card card-default text-center ">
+                            <div class="card-body">
+                                <h1 class="glow-round">{state.localTotalDeaths}</h1>
+                                <h5>Death</h5>
+                                <hr class="hr-white"/>
+                                <div class="activity-horizontal">
+                                    <div class="icon bg-rgba-danger">
+                                        <i class="far fa-frown text-danger"></i>
+                                    </div>
+                                    <div class="count">
+                                        <div>New death</span>
+                                        <div>{state.localNewDeaths}</span>
+                                    </div>
+                                </div>
+
+                                <div class="activity-horizontal">
+                                    <div class="icon bg-rgba-success">
+                                        <i class="far fa-smile text-success"></i>
+                                    </div>
+                                    <div class="count">
+                                        <div>Recovered</span>
+                                        <div>{state.localRecovered}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /total deaths -->
+                </div>
+
+                <!-- Table -->
+                <hospital-table hospitalData={state.hospitalData}></hospital-table>
+                <!-- /Table -->
+
+            </div>
+            <!-- /Left -->
+
+            <!-- Right -->
+            <div class="col-lg-6 h-100">
+                <div class="card card-default h-100">
+                    <div class="card-header">
+                        <h5 class="card-title">Hospital visualization</h5>
+                    </div>
+                    <div class="card-body h-100 px-0 pb-0">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Right -->
+        </div>
+    </div>
+    <script>
+        import Navbar from '../navbar/navbar.riot'
+        import HospitalTable from '../table/table.riot'
+
+        export default {
+            components: { Navbar, HospitalTable },
+            state: {
+                localTotalCases: 0,
+                localTotalDeaths: 0,
+                localNewCases: 0,
+                localRecovered: 0,
+                localNewDeaths: 0,
+                hospitalData: []
+            },
+            onMounted(props) {
+                const {api} = props
+
+                // setInterval(() => {
+                    this.getData(api)
+                        .then(res => {
+                            console.log('res: ', res.data.hospital_data)
+                            this.update({
+                                localTotalCases: res.data.local_total_cases,
+                                localTotalDeaths: res.data.local_deaths,
+                                localNewCases: res.data.local_new_cases,
+                                localRecovered: res.data.local_recovered,
+                                localNewDeaths: res.data.local_new_deaths,
+                                localNumHospitalized: res.data.local_total_number_of_individuals_in_hospitals,
+                                hospitalData: res.data.hospital_data
+                            })
+                        })
+                // }, 3600000)
+            },
+
+            async getData(api) {
+                try {
+                    const response = await fetch(api)
+                    const json = response.json()
+                    return json
+                } catch(error) {
+                    console.log('error: ', error)
+                }
+            },
+        }
+    </script>
+</main>

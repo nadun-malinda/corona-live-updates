@@ -1,0 +1,53 @@
+@import '../components/main/main';
+@import '../components/navbar/navbar';
+@import '../components/table/table';
+
+$text-primary: #5A8DEE!important;
+$text-success: #39DA8A!important;
+$text-warning: #FDAC41!important;
+$text-danger: #FF5B5C!important;
+
+$bg-rgba-primary: rgba(90,141,238,.2)!important;
+$bg-rgba-success: rgba(57,218,138,.2)!important;
+$bg-rgba-warning: rgba(253,172,65,.2)!important;
+$bg-rgba-danger: rgba(255,91,92,.2)!important;
+
+.bg-rgba-primary {
+    background-color: $bg-rgba-primary;
+}
+.bg-rgba-success {
+    background-color: $bg-rgba-success;
+}
+.bg-rgba-warning {
+    background-color: $bg-rgba-warning;
+}
+.bg-rgba-danger {
+    background-color: $bg-rgba-danger;
+}
+.text-primary {
+    color: $text-primary;
+}
+.text-success {
+    color: $text-success;
+}
+.text-warning {
+    color: $text-warning;
+}
+.text-danger {
+    color: $text-danger;
+}
+
+body {
+    background-color: #100e17;
+    color: #fff;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.hr-white {
+    background: #464D5C!important;
+    border-radius: 100%;
+}
