@@ -1,14 +1,19 @@
 <main>
     <navbar />
-    <div class="container h-100">
-        <div class="row h-100">
+
+    <div class="container text-primary mb-4">
+        <small>Last update: {state.lastUpdate}</small>
+    </div>
+
+    <div class="container">
+        <div class="row">
             <!-- Left -->
             <div class="col-lg-6">
 
-                <div class="row mb-4">
+                <div class="row">
                     <!-- total infections -->
-                    <div class="col-sm-6">
-                        <div class="card card-default text-center">
+                    <div class="col-sm-6 mb-4">
+                        <div class="card card-default text-center mb-2">
                             <div class="card-body">
                                 <h1 class="glow-round">{state.localTotalCases}</h1>
                                 <h5>Infections</h5>
@@ -38,8 +43,8 @@
                     <!-- /total infections -->
 
                     <!-- total deaths -->
-                    <div class="col-sm-6">
-                        <div class="card card-default text-center ">
+                    <div class="col-sm-6 mb-4">
+                        <div class="card card-default text-center">
                             <div class="card-body">
                                 <h1 class="glow-round">{state.localTotalDeaths}</h1>
                                 <h5>Death</h5>
@@ -77,12 +82,12 @@
             <!-- /Left -->
 
             <!-- Right -->
-            <div class="col-lg-6 h-100">
-                <div class="card card-default h-100">
+            <div class="col-lg-6 mb-4">
+                <div class="card card-default">
                     <div class="card-header">
                         <h5 class="card-title">Hospital visualization</h5>
                     </div>
-                    <div class="card-body h-100 px-0 pb-0">
+                    <div class="card-body px-0 pb-0">
                         <div id="map"></div>
                     </div>
                 </div>
@@ -90,12 +95,16 @@
             <!-- /Right -->
         </div>
     </div>
+
+    <footer-section></footer-section>
+
     <script>
         import Navbar from '../navbar/navbar.riot'
         import HospitalTable from '../table/table.riot'
+        import FooterSection from '../footer/footer.riot'
 
         export default {
-            components: { Navbar, HospitalTable },
+            components: { Navbar, HospitalTable, FooterSection },
             state: {
                 localTotalCases: 0,
                 localTotalDeaths: 0,
@@ -106,11 +115,8 @@
             },
             onMounted(props) {
                 const {api} = props
-
-                // setInterval(() => {
-                    this.getData(api)
+                this.getData(api)
                         .then(res => {
-                            console.log('res: ', res.data.hospital_data)
                             this.update({
                                 localTotalCases: res.data.local_total_cases,
                                 localTotalDeaths: res.data.local_deaths,
@@ -118,10 +124,10 @@
                                 localRecovered: res.data.local_recovered,
                                 localNewDeaths: res.data.local_new_deaths,
                                 localNumHospitalized: res.data.local_total_number_of_individuals_in_hospitals,
-                                hospitalData: res.data.hospital_data
+                                hospitalData: res.data.hospital_data,
+                                lastUpdate: res.data.update_date_time
                             })
                         })
-                // }, 3600000)
             },
 
             async getData(api) {

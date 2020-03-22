@@ -1,6 +1,7 @@
 @import '../components/main/main';
 @import '../components/navbar/navbar';
 @import '../components/table/table';
+@import '../components/footer/footer';
 
 $text-primary: #5A8DEE!important;
 $text-success: #39DA8A!important;
@@ -11,6 +12,8 @@ $bg-rgba-primary: rgba(90,141,238,.2)!important;
 $bg-rgba-success: rgba(57,218,138,.2)!important;
 $bg-rgba-warning: rgba(253,172,65,.2)!important;
 $bg-rgba-danger: rgba(255,91,92,.2)!important;
+
+$link-blue: #5A8DEE;
 
 .bg-rgba-primary {
     background-color: $bg-rgba-primary;
@@ -37,6 +40,10 @@ $bg-rgba-danger: rgba(255,91,92,.2)!important;
     color: $text-danger;
 }
 
+a {
+    color: $link-blue;
+}
+
 body {
     background-color: #100e17;
     color: #fff;
@@ -44,7 +51,7 @@ body {
 
 #map {
     width: 100%;
-    height: 100%;
+    min-height: 650px;
 }
 
 .hr-white {

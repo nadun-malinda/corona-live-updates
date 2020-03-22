@@ -1,5 +1,5 @@
 <hospital-table>
-    <div class="card card-default">
+    <div class="card card-default mb-4">
         <div class="card-header">
             <h5 class="card-title">Hospital details</h5>
         </div>
@@ -34,17 +34,8 @@
             state: {
                 hospitalData: []
             },
-            onMounted(props) {
-                // const 
-                console.log('Table mounted...', props)
-            },
             onUpdated(props, state) {
-                // this.update({
-                //     hospitalData: props
-                // })
                 state.hospitalData = props
-                console.log('updated props: ', props)
-                console.log('updated state: ', state.hospitalData)
             }
         }
     </script>

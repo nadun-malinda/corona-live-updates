@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="./dist/bundle.css">
 </head>
-<body class="h-100">
-    <div id="root" class="h-100"></div>
+<body>
+    <div id="root"></div>
     
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -19,11 +19,7 @@
         var geocoder;
         var map;
         function initMap() {
-            console.log('initializing map..')
-            // The location of Kandy 7.914514, 80.706414
             let kandy = {lat: 7.914514, lng: 80.706414};
-            // geocoder = new google.maps.Geocoder();
-            var bounds = new google.maps.LatLngBounds();
             map = new google.maps.Map(
                 document.getElementById('map'), {
                     zoom: 8, 
@@ -121,6 +117,18 @@
                 {lat: 9.662908, lng: 80.021394},
                 {lat: 7.287860, lng: 80.632253},
                 {lat: 7.708287, lng: 81.690633}, //TH – Batticaloa
+                {lat: 7.091551, lng: 80.000763}, //DGH- Gampaha
+                {lat: 7.212285, lng: 79.849027}, //DGH – Negombo
+                {lat: 6.687027, lng: 80.393088}, //TH – Rathnapura
+                {lat: 6.992032, lng: 81.052350}, //PGH – Badulla
+                {lat: 6.917912, lng: 79.876219}, //LRH
+                {lat: 6.920344, lng: 79.870487}, //DMH
+                {lat: 7.943397, lng: 81.009551}, //DGH – Polonnaruwa
+                {lat: 6.867210, lng: 79.876861}, //TH - Kalubowila
+                {lat: 6.909863, lng: 79.884962}, //Castle Street Teaching Hospital
+                {lat: 6.127722, lng: 81.122193}, //Base Hospital- Hambantota
+                {lat: 6.894652, lng: 81.342846}, //Base Hospital - Monaragala
+                {lat: 7.948356, lng: 81.246040}, //Base Hospital - Welikanda
             ];
 
             for (let i=0; i<hospitals.length; i++) {
@@ -129,54 +137,7 @@
                     position: hospitals[i],
                     title: 'Uluru (Ayers Rock)'
                 });
-
-                bounds.extend(marker.position);
-
             }
-            // codeAddress(0);
-        }
-
-        function codeAddress(i) {
-            let addresses = [
-                'National Institute of Infectious Diseases',
-                'National Hospital Sri Lanka',
-                'TH - Ragama',
-                'TH - Karapitiya',
-                'TH - Anuradhapura',
-                'TH - Kurunegala',
-                'TH- Jaffna',
-                'National Hospital Kandy',
-                'TH – Batticaloa',
-                'DGH- Gampaha',
-                'DGH – Negombo',
-                'TH – Rathnapura',
-                'PGH – Badulla',
-                'LRH',
-                'DMH',
-                'DGH – Polonnaruwa',
-                'TH - Kalubowila',
-                'Castle Street Teaching Hospital'
-            ];
-            geocoder.geocode({
-                'address': addresses[i],
-                'componentRestrictions': {
-                    country: 'LK'
-                }
-            }, function(results, status) {
-                if (status == 'OK') {
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
-                } else {
-                    // alert('Geocode was not successful for the following reason: ' + status);
-                }
-
-                i++;
-                if (i < addresses.length) {
-                    codeAddress(i)
-                }
-            });
         }
     </script>
 </body>
