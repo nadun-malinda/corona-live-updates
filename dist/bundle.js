@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mountApp = riot__WEBPACK_IMPORTED_MODULE_0__["component"](_components_main_main_riot__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var app = mountApp(document.getElementById('root'), {
-  api: 'http://hpb.health.gov.lk/api/get-current-statistical'
+  api: 'https://hpb.health.gov.lk/api/get-current-statistical'
 });
 
 /***/ }),
