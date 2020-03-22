@@ -19,11 +19,9 @@
         var geocoder;
         var map;
         function initMap() {
-            let kandy = {lat: 7.914514, lng: 80.706414};
+            let bounds = new google.maps.LatLngBounds ();
             map = new google.maps.Map(
                 document.getElementById('map'), {
-                    zoom: 8, 
-                    center: kandy,
                     disableDefaultUI: true,
                     styles: [
                         {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
@@ -108,36 +106,102 @@
                 });
 
             let hospitals = [
-                {lat: 6.922838, lng: 79.918205},
-                {lat: 6.919002, lng: 79.869004},
-                {lat: 7.029394, lng: 79.924093},
-                {lat: 6.067329, lng: 80.226063},
-                {lat: 8.325041, lng: 80.414011},
-                {lat: 7.479366, lng: 80.359104},
-                {lat: 9.662908, lng: 80.021394},
-                {lat: 7.287860, lng: 80.632253},
-                {lat: 7.708287, lng: 81.690633}, //TH – Batticaloa
-                {lat: 7.091551, lng: 80.000763}, //DGH- Gampaha
-                {lat: 7.212285, lng: 79.849027}, //DGH – Negombo
-                {lat: 6.687027, lng: 80.393088}, //TH – Rathnapura
-                {lat: 6.992032, lng: 81.052350}, //PGH – Badulla
-                {lat: 6.917912, lng: 79.876219}, //LRH
-                {lat: 6.920344, lng: 79.870487}, //DMH
-                {lat: 7.943397, lng: 81.009551}, //DGH – Polonnaruwa
-                {lat: 6.867210, lng: 79.876861}, //TH - Kalubowila
-                {lat: 6.909863, lng: 79.884962}, //Castle Street Teaching Hospital
-                {lat: 6.127722, lng: 81.122193}, //Base Hospital- Hambantota
-                {lat: 6.894652, lng: 81.342846}, //Base Hospital - Monaragala
-                {lat: 7.948356, lng: 81.246040}, //Base Hospital - Welikanda
+                {
+                    latLng: {lat: 6.922838, lng: 79.918205},
+                    name: 'National Institute of Infectious Diseases'
+                },
+                {
+                    latLng: {lat: 6.919002, lng: 79.869004},
+                    name: 'National Hospital Sri Lanka'
+                },
+                {
+                    latLng: {lat: 7.029394, lng: 79.924093},
+                    name: 'TH - Ragama'
+                },
+                {
+                    latLng: {lat: 6.067329, lng: 80.226063},
+                    name: 'TH - Karapitiya'
+                },
+                {
+                    latLng: {lat: 8.325041, lng: 80.414011},
+                    name: 'TH - Anuradhapura'
+                },
+                {
+                    latLng: {lat: 7.479366, lng: 80.359104},
+                    name: 'TH - Kurunegala'
+                },
+                {
+                    latLng: {lat: 9.662908, lng: 80.021394},
+                    name: 'TH- Jaffna'
+                },
+                {
+                    latLng: {lat: 7.287860, lng: 80.632253},
+                    name: 'National Hospital Kandy'
+                },
+                {
+                    latLng: {lat: 7.708287, lng: 81.690633},
+                    name: 'TH – Batticaloa'
+                },
+                {
+                    latLng: {lat: 7.091551, lng: 80.000763},
+                    name: 'DGH- Gampaha'
+                },
+                {
+                    latLng: {lat: 7.212285, lng: 79.849027},
+                    name: 'DGH – Negombo'
+                },
+                {
+                    latLng: {lat: 6.687027, lng: 80.393088},
+                    name: 'TH – Rathnapura'
+                },
+                {
+                    latLng: {lat: 6.992032, lng: 81.052350},
+                    name: 'PGH – Badulla'
+                },
+                {
+                    latLng: {lat: 6.917912, lng: 79.876219},
+                    name: 'LRH'
+                },
+                {
+                    latLng: {lat: 6.920344, lng: 79.870487},
+                    name: 'DMH'
+                },
+                {
+                    latLng: {lat: 7.943397, lng: 81.009551},
+                    name: 'DGH – Polonnaruwa'
+                },
+                {
+                    latLng: {lat: 6.867210, lng: 79.876861},
+                    name: 'TH - Kalubowila'
+                },
+                {
+                    latLng: {lat: 6.909863, lng: 79.884962},
+                    name: 'Castle Street Teaching Hospital'
+                },
+                {
+                    latLng: {lat: 6.127722, lng: 81.122193},
+                    name: 'Base Hospital- Hambantota'
+                },
+                {
+                    latLng: {lat: 6.894652, lng: 81.342846},
+                    name: 'Base Hospital - Monaragala'  
+                },
+                {
+                    latLng: {lat: 7.948356, lng: 81.246040},
+                    name: 'Base Hospital - Welikanda'
+                }
             ];
 
             for (let i=0; i<hospitals.length; i++) {
                 let marker = new google.maps.Marker({
                     map: map,
-                    position: hospitals[i],
-                    title: 'Uluru (Ayers Rock)'
+                    position: hospitals[i].latLng,
+                    title: hospitals[i].name
                 });
+                bounds.extend (marker.position);
             }
+
+            map.fitBounds (bounds);
         }
     </script>
 </body>

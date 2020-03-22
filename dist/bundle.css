@@ -1,2 +1,109 @@
-.glow-round{width:110px;height:110px;margin:0 auto 20px;border-radius:100%;line-height:2.6}.glow-round.primary{border:5px solid #5A8DEE;box-shadow:0 1px 11px 1px #5A8DEE !important}.glow-round.danger{border:5px solid #ff5b5cad;box-shadow:0 1px 11px 1px #ff5b5cad !important}.activity-horizontal{display:flex;margin-bottom:12px;align-items:center}.activity-horizontal .icon{width:32px;height:32px;display:flex;justify-content:center;align-items:center;border-radius:50%;color:#5A8DEE !important;margin-right:8px}.activity-horizontal .count{display:flex;justify-content:space-between;align-items:center;width:calc(100% - 40px)}.activity-horizontal .count p{margin:0}.activity-horizontal .count small{font-size:.65rem;color:#8A99B5;display:block;text-align:left}.card{background-color:#17141d;box-shadow:-1rem 0 3rem #000}.card .card-title{margin-bottom:0.25rem}.card .text-subtitle{margin-bottom:0}.navbar-top{background-color:#100e17;color:#fff}@media (min-width: 576px){.navbar-top>.container{padding-left:15px;padding-right:15px}}.table-dark{background-color:#17141d}.footer{color:#8A99B5}.footer .text-subtitle{margin-bottom:0}@media (min-width: 576px){.footer .right{text-align:right}}.bg-rgba-primary{background-color:rgba(90,141,238,0.2) !important}.bg-rgba-success{background-color:rgba(57,218,138,0.2) !important}.bg-rgba-warning{background-color:rgba(253,172,65,0.2) !important}.bg-rgba-danger{background-color:rgba(255,91,92,0.2) !important}.text-primary{color:#5A8DEE !important}.text-success{color:#39DA8A !important}.text-warning{color:#FDAC41 !important}.text-danger{color:#FF5B5C !important}.text-subtitle{color:#8A99B5;font-size:0.85rem}a{color:#5A8DEE}body{background-color:#100e17;color:#fff}#map{width:100%;min-height:650px}.hr-white{background:#464D5C !important;border-radius:100%}
+.glow-round {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 20px;
+  border-radius: 100%;
+  line-height: 2.6; }
+  .glow-round.primary {
+    border: 5px solid #5A8DEE;
+    box-shadow: 0 1px 11px 1px #5A8DEE !important; }
+  .glow-round.danger {
+    border: 5px solid #ff5b5cad;
+    box-shadow: 0 1px 11px 1px #ff5b5cad !important; }
+
+.activity-horizontal {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: center; }
+  .activity-horizontal .icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #5A8DEE !important;
+    margin-right: 8px; }
+  .activity-horizontal .count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 40px); }
+    .activity-horizontal .count p {
+      margin: 0; }
+    .activity-horizontal .count small {
+      font-size: .65rem;
+      color: #8A99B5;
+      display: block;
+      text-align: left; }
+
+.card {
+  background-color: #17141d;
+  box-shadow: -1rem 0 3rem #000; }
+  .card .card-title {
+    margin-bottom: 0.25rem; }
+  .card .text-subtitle {
+    margin-bottom: 0; }
+
+.navbar-top {
+  background-color: #100e17;
+  color: #fff; }
+  @media (min-width: 576px) {
+    .navbar-top > .container {
+      padding-left: 15px;
+      padding-right: 15px; } }
+
+.table-dark {
+  background-color: #17141d; }
+
+.footer {
+  color: #8A99B5; }
+  .footer .text-subtitle {
+    margin-bottom: 0; }
+  @media (min-width: 576px) {
+    .footer .right {
+      text-align: right; } }
+
+.bg-rgba-primary {
+  background-color: rgba(90, 141, 238, 0.2) !important; }
+
+.bg-rgba-success {
+  background-color: rgba(57, 218, 138, 0.2) !important; }
+
+.bg-rgba-warning {
+  background-color: rgba(253, 172, 65, 0.2) !important; }
+
+.bg-rgba-danger {
+  background-color: rgba(255, 91, 92, 0.2) !important; }
+
+.text-primary {
+  color: #5A8DEE !important; }
+
+.text-success {
+  color: #39DA8A !important; }
+
+.text-warning {
+  color: #FDAC41 !important; }
+
+.text-danger {
+  color: #FF5B5C !important; }
+
+.text-subtitle {
+  color: #8A99B5;
+  font-size: 0.85rem; }
+
+a {
+  color: #5A8DEE; }
+
+body {
+  background-color: #100e17;
+  color: #fff; }
+
+#map {
+  width: 100%;
+  min-height: 680px; }
+
+.hr-white {
+  background: #464D5C !important;
+  border-radius: 100%; }
 
