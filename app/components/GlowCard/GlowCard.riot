@@ -1,0 +1,21 @@
+<glow-card>
+    <div class="card card-default text-center mb-2">
+        <div class="card-body">
+            <h1 class="glow-round {props.glowCardData.type}">{props.glowCardData.glowCount}</h1>
+            <h5>{props.glowCardData.mainTitle}</h5>
+            <hr class="hr-white"/>
+            <div class="activity-horizontal" each={item in props.glowCardData.subItems}>
+                <div class="icon bg-rgba-{item.icon.type}">
+                    <i class="{item.icon.class} text-{item.icon.type}"></i>
+                </div>
+                <div class="count">
+                    <div>
+                        <p>{item.title}</p>
+                        <small>{item.subTitle}</small>
+                    </div>
+                    <div>{item.count}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</glow-card>

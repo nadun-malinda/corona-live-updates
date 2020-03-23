@@ -11,83 +11,13 @@
             <div class="col-lg-6">
 
                 <div class="row">
-                    <!-- total infections -->
-                    <div class="col-sm-6 mb-4">
-                        <div class="card card-default text-center mb-2">
-                            <div class="card-body">
-                                <h1 class="glow-round primary">{state.localTotalCases}</h1>
-                                <h5>Infections</h5>
-                                <hr class="hr-white"/>
-                                <div class="activity-horizontal">
-                                    <div class="icon bg-rgba-primary">
-                                        <i class="fas fa-book-medical text-primary"></i>
-                                    </div>
-                                    <div class="count">
-                                        <div>
-                                            <p>New cases</p>
-                                            <small>last 24 hrs</small>
-                                        </div>
-                                        <div>{state.localNewCases}</div>
-                                    </div>
-                                </div>
-
-                                <div class="activity-horizontal">
-                                    <div class="icon bg-rgba-warning">
-                                        <i class="fas fa-procedures text-warning"></i>
-                                    </div>
-                                    <div class="count">
-                                        <div>
-                                            <p>Hospitalized</p>
-                                            <small>currently</small>
-                                        </div>
-                                        <div>{state.localNumHospitalized}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-6 mb-4" each={card in state.glowCard}>
+                        <glow-card glowCardData={card} />
                     </div>
-                    <!-- /total infections -->
-
-                    <!-- total deaths -->
-                    <div class="col-sm-6 mb-4">
-                        <div class="card card-default text-center">
-                            <div class="card-body">
-                                <h1 class="glow-round danger">{state.localTotalDeaths}</h1>
-                                <h5>Death</h5>
-                                <hr class="hr-white"/>
-                                <div class="activity-horizontal">
-                                    <div class="icon bg-rgba-danger">
-                                        <i class="far fa-frown text-danger"></i>
-                                    </div>
-                                    <div class="count">
-                                        <div>
-                                            <p>New death</p>
-                                            <small>last 24 hrs</small>
-                                        </div>
-                                        <div>{state.localNewDeaths}</div>
-                                    </div>
-                                </div>
-
-                                <div class="activity-horizontal">
-                                    <div class="icon bg-rgba-success">
-                                        <i class="far fa-smile text-success"></i>
-                                    </div>
-                                    <div class="count">
-                                        <div>
-                                            <p>Recovered</p>
-                                            <small>during the time</small>
-                                        </div>
-                                        <div>{state.localRecovered}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /total deaths -->
                 </div>
 
                 <!-- Table -->
-                <hospital-table hospitalData={state.hospitalData}></hospital-table>
+                <hospital-table hospitalData={state.hospitalData} />
                 <!-- /Table -->
 
             </div>
@@ -95,50 +25,89 @@
 
             <!-- Right -->
             <div class="col-lg-6 mb-4">
-                <div class="card card-default">
-                    <div class="card-header">
-                        <h5 class="card-title">Hospital visualization</h5>
-                        <p class="text-subtitle">Locations of the hospitals use as quarantine centres in SriLanka</p>
-                    </div>
-                    <div class="card-body px-0 pb-0">
-                        <div id="map"></div>
-                    </div>
-                </div>
+                <map-section />
             </div>
             <!-- /Right -->
         </div>
     </div>
 
-    <footer-section></footer-section>
+    <footer-section />
 
     <script>
-        import Navbar from '../navbar/navbar.riot'
-        import HospitalTable from '../table/table.riot'
-        import FooterSection from '../footer/footer.riot'
+        import Navbar from '../Navbar/Navbar.riot'
+        import HospitalTable from '../Table/Table.riot'
+        import FooterSection from '../Footer/Footer.riot'
+        import GlowCard from '../GlowCard/GlowCard.riot'
+        import MapSection from '../Map/Map.riot'
 
         export default {
-            components: { Navbar, HospitalTable, FooterSection },
+            components: { Navbar, HospitalTable, FooterSection, GlowCard, MapSection },
             state: {
-                localTotalCases: 0,
-                localTotalDeaths: 0,
-                localNewCases: 0,
-                localRecovered: 0,
-                localNewDeaths: 0,
-                hospitalData: []
+                hospitalData: [],
+                glowCard: []
             },
             onMounted(props) {
                 const {api} = props
+                let cardData = [];
                 this.getData(api)
                         .then(res => {
+                            cardData.push(
+                                {
+                                    type: 'primary',
+                                    mainTitle: 'Infections',
+                                    glowCount: res.data.local_total_cases,
+                                    subItems: [
+                                        {
+                                            title: 'New cases',
+                                            subTitle: 'last 24 hrs',
+                                            count: res.data.local_new_cases,
+                                            icon: {
+                                                class: 'fas fa-book-medical',
+                                                type: 'primary'
+                                            },
+                                        },
+                                        {
+                                            title: 'Hospitalized',
+                                            subTitle: 'currently',
+                                            count: res.data.local_total_number_of_individuals_in_hospitals,
+                                            icon: {
+                                                class: 'fas fa-procedures',
+                                                type: 'warning'
+                                            },
+                                        }
+                                    ]
+                                },
+                                {
+                                    type: 'danger',
+                                    mainTitle: 'Death',
+                                    glowCount: res.data.local_deaths,
+                                    subItems: [
+                                        {
+                                            title: 'New death',
+                                            subTitle: 'last 24 hrs',
+                                            count: res.data.local_new_deaths,
+                                            icon: {
+                                                class: 'far fa-frown',
+                                                type: 'danger'
+                                            },
+                                        },
+                                        {
+                                            title: 'Recovered',
+                                            subTitle: 'during the time',
+                                            count: res.data.local_recovered,
+                                            icon: {
+                                                class: 'fas fa-smile',
+                                                type: 'success'
+                                            },
+                                        }
+                                    ]
+                                }
+                            )
+
                             this.update({
-                                localTotalCases: res.data.local_total_cases,
-                                localTotalDeaths: res.data.local_deaths,
-                                localNewCases: res.data.local_new_cases,
-                                localRecovered: res.data.local_recovered,
-                                localNewDeaths: res.data.local_new_deaths,
-                                localNumHospitalized: res.data.local_total_number_of_individuals_in_hospitals,
                                 hospitalData: res.data.hospital_data,
-                                lastUpdate: res.data.update_date_time
+                                lastUpdate: res.data.update_date_time,
+                                glowCard: cardData
                             })
                         })
             },

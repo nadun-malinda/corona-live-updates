@@ -1,20 +1,11 @@
-@import '../components/main/main';
-@import '../components/navbar/navbar';
-@import '../components/table/table';
-@import '../components/footer/footer';
+@import '../components/Main/main';
+@import '../components/Navbar/navbar';
+@import '../components/Table/table';
+@import '../components/Footer/footer';
+@import '../components/GlowCard/glow-card';
+@import '../components/Map/map';
 
-$text-primary: #5A8DEE!important;
-$text-success: #39DA8A!important;
-$text-warning: #FDAC41!important;
-$text-danger: #FF5B5C!important;
-
-$bg-rgba-primary: rgba(90,141,238,.2)!important;
-$bg-rgba-success: rgba(57,218,138,.2)!important;
-$bg-rgba-warning: rgba(253,172,65,.2)!important;
-$bg-rgba-danger: rgba(255,91,92,.2)!important;
-
-$link-blue: #5A8DEE;
-$greenish-blue: #8A99B5;
+@import './variables';
 
 .bg-rgba-primary {
     background-color: $bg-rgba-primary;
@@ -53,11 +44,6 @@ a {
 body {
     background-color: #100e17;
     color: #fff;
-}
-
-#map {
-    width: 100%;
-    min-height: 680px;
 }
 
 .hr-white {
