@@ -39,6 +39,9 @@
         import FooterSection from '../Footer/Footer.riot'
         import GlowCard from '../GlowCard/GlowCard.riot'
         import MapSection from '../Map/Map.riot'
+        import dayjs from 'dayjs'
+        const relativeTime = require('dayjs/plugin/relativeTime')
+        dayjs.extend(relativeTime)
 
         export default {
             components: { Navbar, HospitalTable, FooterSection, GlowCard, MapSection },
@@ -106,7 +109,7 @@
 
                             this.update({
                                 hospitalData: res.data.hospital_data,
-                                lastUpdate: res.data.update_date_time,
+                                lastUpdate: dayjs(res.data.update_date_time, "YYYY-MM-DD h:m:s").fromNow(),
                                 glowCard: cardData
                             })
                         })
