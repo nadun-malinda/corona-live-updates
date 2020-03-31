@@ -18,9 +18,9 @@
             },
             onUpdated(props, state) {
                 state.hospitalData = props.hospitalData
-                db.addHospitalData(state.hospitalData)
+                // db.addHospitalData(state.hospitalData)
                 google.maps.event.addDomListener(window, "load", this.initMap)
-                this.initMap()
+                // this.initMap()
             },
             initMap() {
                 const bounds = new google.maps.LatLngBounds ()
