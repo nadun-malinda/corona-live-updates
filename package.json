@@ -4,7 +4,7 @@
   "description": "Get live updates about Covid-19",
   "main": "./app/app.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --port 3000 --mode development",
     "watch": "cross-env NODE_ENV=development webpack --watch --mode development",
     "prod": "cross-env NODE_ENV=production webpack --mode production"
   },
