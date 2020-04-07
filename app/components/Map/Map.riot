@@ -4,13 +4,14 @@
             <h5 class="card-title">Hospital locations</h5>
             <p class="text-subtitle">Locations of the hospitals use as quarantine centres in SriLanka</p>
         </div>
-        <div class="card-body px-0 pb-0">
+        <div class="card-body px-0 py-0">
             <div id="map"></div>
         </div>
     </div>
 
     <script>
         import db from '../../database/database.js'
+        import hospitalRawData from '../../database/hospitals.js'
 
         export default {
             state: {
@@ -20,7 +21,7 @@
                 state.hospitalData = props.hospitalData
                 // db.addHospitalData(state.hospitalData)
                 google.maps.event.addDomListener(window, "load", this.initMap)
-                // this.initMap()
+                this.initMap()
             },
             initMap() {
                 const bounds = new google.maps.LatLngBounds ()
@@ -28,8 +29,9 @@
                 const map = new google.maps.Map(
                     document.getElementById('map'), {
                         disableDefaultUI: true,
-                        // zoom: 7,
-                        // center: {lat: 6.929497, lng: 79.919307}, //6.929497, 79.919307
+                        zoomControl: true,
+                        zoom: 8,
+                        center: {lat: 7.872345, lng: 80.650109}, //6.929497, 79.919307
                         styles: [
                             {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
                             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -112,20 +114,32 @@
                         ]
                     });
 
-                    db.getAllHospitals()
-                        .then(hospitals => {
-                            hospitals.forEach((hospital, index) => {
-                                if (hospital.location.lat !== '') {
-                                    let marker = new google.maps.Marker({
-                                        map: map,
-                                        position: hospital.location,
-                                        title: hospital.name
-                                    })
-                                    bounds.extend(marker.position)
-                                    map.fitBounds(bounds)
-                                }
+                    // db.getAllHospitals()
+                    //     .then(hospitals => {
+                    //         hospitals.forEach((hospital, index) => {
+                    //             if (hospital.location.lat !== '') {
+                    //                 let marker = new google.maps.Marker({
+                    //                     map: map,
+                    //                     position: hospital.location,
+                    //                     title: hospital.name
+                    //                 })
+                    //                 bounds.extend(marker.position)
+                    //                 map.fitBounds(bounds)
+                    //             }
+                    //         })
+                    //     })
+
+                    hospitalRawData.forEach(hospital => {
+                        if (hospital.latLng.lat !== '') {
+                            let marker = new google.maps.Marker({
+                                map: map,
+                                position: hospital.latLng,
+                                title: hospital.name
                             })
-                        })
+                            // bounds.extend(marker.position)
+                            // map.fitBounds(bounds)
+                        }
+                    })
 
                 // map.data.loadGeoJson('./dist/map.json')
                 // map.data.setStyle({

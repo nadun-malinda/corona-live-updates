@@ -3,6 +3,7 @@ import 'firebase/firestore'
 import 'firebase/database'
 import 'firebase/analytics'
 import config from '../../config'
+import rawData from '../database/hospitals'
 
 // Initialize Firebase
 firebase.initializeApp(config.firebaseConfig)
@@ -13,14 +14,16 @@ export default {
     addHospitalData(hospitalData) {
         this.getAllHospitalNames()
             .then(hospitalNames => {
-                hospitalData.forEach(data => {
+                hospitalData.forEach((data, index) => {
                     if (!hospitalNames.includes(data.hospital.name)) {
+                        let hospitalInRawData = rawData.find(hos => hos.name === data.hospital.name)
+
                         db.collection('hospitals').add({
                             id: data.hospital_id,
                             name: data.hospital.name,
                             district: '',
                             country: '',
-                            location: {},
+                            location: hospitalInRawData ? hospitalInRawData.latLng : {},
                             cumulativeLocal: data.cumulative_local,
                             cumulativeForeign: data.cumulative_foreign,
                             treatmentLocal: data.treatment_local,
@@ -34,6 +37,10 @@ export default {
                         .catch(err => {
                             console.log('Error adding document: ', err)
                         })
+                    } else {
+                        let hospitalInRawData = rawData.find(hos => hos.name === data.hospital.name)
+                        console.log('hos in raw data: ', hospitalInRawData)
+                        console.log('already included: ', index+1, ' - ', data.hospital.name)
                     }
                 })
             })
